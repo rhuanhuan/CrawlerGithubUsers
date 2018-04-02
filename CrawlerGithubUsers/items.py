@@ -14,6 +14,10 @@ class GitUsersItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
     email = scrapy.Field()
-    cellPhone = scrapy.Field()
     followers = scrapy.Field()
+    company = scrapy.Field()
+    hireable = scrapy.Field()
+    created_at = scrapy.Field()
+    product = scrapy.Field()
+
     pass
