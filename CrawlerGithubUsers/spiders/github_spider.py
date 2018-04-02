@@ -22,9 +22,9 @@ class GitHubSpider(CrawlSpider):
     name = "git_spider"
     allowed_domains = ["github.com"]
     start_urls = [
-        get_users_list_url(1),
-        "https://api.github.com/search/users?"
-        "q=+location:%22WuHan%22&page=1&per_page=100"
+        get_users_list_url(1)
+        # "https://api.github.com/search/users?"
+        # "q=+location:%22WuHan%22&page=1&per_page=100"
     ]
 
     def parse(self, response):
@@ -34,9 +34,12 @@ class GitHubSpider(CrawlSpider):
             item['username'] = users["login"]
             item['link'] = users["html_url"]
 
-            detail_response = requests.get(get_user_detail_url(item['username']))
+            detail_response = requests.get(
+                url=get_user_detail_url(item['username']),
+                auth=(self.http_user, self.http_pass)
+            )
             user_detail = json.loads(detail_response.content)
-            item['name'] = user_detail['name']
+            item['name'] = user_detail["name"]
             item['email'] = user_detail["email"]
             item['company'] = user_detail["company"]
             item['hireable'] = user_detail["hireable"]
