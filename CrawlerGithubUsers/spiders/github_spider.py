@@ -6,7 +6,7 @@ from CrawlerGithubUsers.items import GitUsersItem
 import os
 import requests
 import dateutil.parser
-
+import time
 
 git_init_date = '2008-03-01T00:00:00Z'
 crawler_ended_date = '2018-03-25T00:00:00Z'
@@ -46,6 +46,7 @@ class GitHubSpider(CrawlSpider):
                 url=get_user_detail_url(item['username']),
                 auth=(self.http_user, self.http_pass)
             )
+            time.sleep(2)
             user_detail = json.loads(detail_response.content)
             item['name'] = user_detail["name"]
             item['email'] = user_detail["email"]
