@@ -1,0 +1,4 @@
+.idea/
+env.sh
+CrawlerGithubUsers/__pycache__
+__pycache__/
